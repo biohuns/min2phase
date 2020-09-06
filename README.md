@@ -1,7 +1,5 @@
 # `@biohuns/min2phase.js`
 
-![CI](https://github.com/biohuns/min2phase.js/workflows/CI/badge.svg)
-
 This JS package is fork from [cubing/min2phase.js](https://github.com/cubing/min2phase.js). For Chen Shuang's Kociemba-based [cs0x7f/min2phase](https://github.com/cs0x7f/min2phase) 3x3x3 solver.
 
 ## Usage
