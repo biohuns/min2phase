@@ -14,7 +14,7 @@ test:
 
 .PHONY: clean
 clean: clean-dist
-	rm -f yarn-error.log
+	rm -f npm-debug.log*
 
 .PHONY: clean-dist
 clean-dist:
