@@ -88,10 +88,10 @@ var ud2std = [0, 1, 2, 4, 7, 9, 10, 11, 13, 16];
 var std2ud = createArray(18);
 var Cnk = createArrays(12, 13);
 var move2str = ["U ", "U2", "U'", "R ", "R2", "R'", "F ", "F2", "F'", "D ", "D2", "D'", "L ", "L2", "L'", "B ", "B2", "B'"];
-var urfMove = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17], 
+var urfMove = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17],
 											[6, 7, 8, 0, 1, 2, 3, 4, 5,15,16,17, 9,10,11,12,13,14],
 											[3, 4, 5, 6, 7, 8, 0, 1, 2,12,13,14,15,16,17, 9,10,11],
-											[2, 1, 0, 5, 4, 3, 8, 7, 6,11,10, 9,14,13,12,17,16,15], 
+											[2, 1, 0, 5, 4, 3, 8, 7, 6,11,10, 9,14,13,12,17,16,15],
 											[8, 7, 6, 2, 1, 0, 5, 4, 3,17,16,15,11,10, 9,14,13,12],
 											[5, 4, 3, 8, 7, 6, 2, 1, 0,14,13,12,17,16,15,11,10, 9]];
 for (var i=0; i<12; i++) {
@@ -140,7 +140,7 @@ function CubieCube() {
 		}
 		return idx;
 	}
-	
+
 	this.getFlipSym = function getFlipSym() {
 		if (FlipR2S != 0) {
 			return FlipR2S[this.getFlip()];
@@ -162,7 +162,7 @@ function CubieCube() {
 			idx >>>= 1;
 		}
 	}
-	
+
 	this.getTwist = function getTwist() {
 		var idx = 0;
 		for (var i=0; i<7; i++) {
@@ -171,7 +171,7 @@ function CubieCube() {
 		}
 		return idx;
 	}
-	
+
 	this.getTwistSym = function getTwistSym() {
 		if (TwistR2S != null) {
 			return TwistR2S[this.getTwist()];
@@ -195,7 +195,7 @@ function CubieCube() {
 		}
 		this.co[7] = (15 - twst) % 3;
 	}
-	
+
 	this.getUDSlice = function getUDSlice() {
 		var idx = 0;
 		var r = 4;
@@ -221,7 +221,7 @@ function CubieCube() {
 		}
 	}
 	this.getMPerm = function getMPerm() {
-		var m = (1 << this.ep[11]);		
+		var m = (1 << this.ep[11]);
 		var idx = 0;
 		for (var i=10; i>=8; --i) {
 			var t = 1 << this.ep[i];
@@ -229,7 +229,7 @@ function CubieCube() {
 			m |= t;
 		}
 		return idx;
-	}	
+	}
 	this.setMPerm = function setMPerm(idx) {
 		this.ep[11] = 8;
 		for (var i=10; i>=8; i--) {
@@ -239,9 +239,9 @@ function CubieCube() {
 				if (this.ep[j] >= this.ep[i])
 					this.ep[j]++;
 			}
-		}	
+		}
 	}
-	
+
 	this.getMid3 = function getMid3() {
 		var idxA = 0;
 		var idxB = 0;
@@ -257,7 +257,7 @@ function CubieCube() {
 		}
 		return (idxA * 6 + idxB);
 	}
-	
+
 	this.setMid3 = function setMid3(idxA) {
 		var edge = perm3[idxA % 6];
 		idxA = ~~(idxA / 6);
@@ -269,9 +269,9 @@ function CubieCube() {
 			} else {
 				this.ep[i] = (8-i+r);
 			}
-		}	
+		}
 	}
-	
+
 	this.getURtoUL = function getURtoUL() {
 		var idxA = 0;
 		var idxB = 0;
@@ -285,7 +285,7 @@ function CubieCube() {
 				mask |= t;
 			}
 		}
-		return (idxA * 6 + idxB);	
+		return (idxA * 6 + idxB);
 	}
 
 	this.getDRtoDL = function getDRtoDL() {
@@ -301,8 +301,8 @@ function CubieCube() {
 				mask |= t;
 			}
 		}
-		return (idxA * 6 + idxB);	
-	}	
+		return (idxA * 6 + idxB);
+	}
 
 	this.setEdgePerm = function setEdgePerm(idx) {
 		this.ep[11] = 0;
@@ -313,18 +313,18 @@ function CubieCube() {
 				if (this.ep[j] >= this.ep[i])
 					this.ep[j]++;
 			}
-		}			
+		}
 	}
-	
+
 	this.getEdgePerm = function getEdgePerm() {
-		var m = (1 << ep[11]);		
+		var m = (1 << ep[11]);
 		var idx = 0;
 		for (var i=10; i>=0; --i) {
 			var t = 1 << this.ep[i];
 			idx += bitCount(m & (t - 1)) * fact[11-i];
 			m |= t;
 		}
-		return idx;		
+		return idx;
 	}
 
 	this.getCPermSym = function getCPermSym() {
@@ -342,8 +342,8 @@ function CubieCube() {
 		}
 		return 0;
 	}
-	
-	this.getEPermSym = function getEPermSym() {	
+
+	this.getEPermSym = function getEPermSym() {
 		if (EPermR2S != null) {
 			return EPermR2S[get8Perm(this.ep)];
 		}
@@ -355,15 +355,15 @@ function CubieCube() {
 			}
 		}
 		return 0;
-	}	
+	}
 
 	this.URFConjugate = function URFConjugate() {
 		CornMult(urf2, this, temps);
-		CornMult(temps, urf1, this);		
+		CornMult(temps, urf1, this);
 		EdgeMult(urf2, this, temps);
-		EdgeMult(temps, urf1, this);		    		
+		EdgeMult(temps, urf1, this);
 	}
-	
+
 	this.invCubieCube = function invCubieCube() {
 		for (var edge=0; edge<12; edge++)
 			temps.ep[this.ep[edge]] = edge;
@@ -387,7 +387,7 @@ function CubieCube() {
 		this.setEdgePerm(eperm);
 		this.setFlip(flip);
 	}
-	
+
 	this.copy = function copy(c) {
 		for (var i=0; i<8; i++) {
 			this.cp[i] = c.cp[i];
@@ -425,7 +425,7 @@ function get8Perm(arr) {
 		idx = (8 - i) * idx + ((val >> v) & 7);
 		val -= 0x11111110 << v;
 	}
-	return idx;	
+	return idx;
 }
 
 function CornMult(a, b, prod) {
@@ -441,7 +441,7 @@ function CornMult(a, b, prod) {
 		}
 		prod.co[corn] = ori;
 	}
-}	
+}
 
 function EdgeMult(a, b, prod) {
 	for (var ed=0; ed<12; ed++) {
@@ -452,12 +452,12 @@ function EdgeMult(a, b, prod) {
 
 function CornConjugate(a, idx, b) {
 	CornMult(CubeSym[SymInv[idx]], a, cctemp);
-	CornMult(cctemp, CubeSym[idx], b);		
+	CornMult(cctemp, CubeSym[idx], b);
 }
 
 function EdgeConjugate(a, idx, b) {
 	EdgeMult(CubeSym[SymInv[idx]], a, cctemp);
-	EdgeMult(cctemp, CubeSym[idx], b);		
+	EdgeMult(cctemp, CubeSym[idx], b);
 }
 
 var CubeSym = Array(16);
@@ -532,7 +532,7 @@ function CubieInit() {
 		if (i % 4 == 3) {
 			CornMult(c, lr2, d);
 			EdgeMult(c, lr2, d);
-			temp = d;	d = c;	c = temp;				
+			temp = d;	d = c;	c = temp;
 		}
 		if (i % 8 == 7) {
 			CornMult(c, f2, d);
@@ -647,7 +647,7 @@ function CubieInit() {
 		var b = ~~(c.getDRtoDL() / 6);
 		mask[a][b>>>5] |= 1 << (b&0x1f);
 	}
-	
+
 	for (var i=0; i<56; i++) {
 		count = 0;
 		for (var j=0; j<56; j++) {
@@ -682,9 +682,9 @@ var FlipMove = Array(336);//new char[336][18];
 var UDSliceConj = Array(495);//new char[495][8];
 var UDSliceTwistPrun = Array(495*324);//new byte[495 * 324];
 var UDSliceFlipPrun = Array(495*336);//new byte[495 * 336];
-	
+
 var TwistFlipPrun = Array(336*324*8);//new byte[336 * 324 * 8];
-	
+
 	//phase1to2
 var Mid3Move = Array(1320);//new char[1320][18];
 var Mid32MPerm = Array(24);//new byte[24];
@@ -710,7 +710,7 @@ function CoordInit() {
 			CornMult(c, moveCube[j], d);
 			CPermMove[i][j] = d.getCPermSym();
 		}
-	}		
+	}
 	for (i=0; i<2768; i++) {
 		EPermMove[i] = Array(10);
 		set8Perm(c.ep, EPermS2R[i]);
@@ -758,7 +758,7 @@ function CoordInit() {
 			EdgeMult(c, moveCube[j], d);
 			Mid3Move[i][j] = d.getMid3();
 		}
-	}	
+	}
 	for (i=0; i<24; i++) {
 		c.setMPerm(i);
 		Mid32MPerm[c.getMid3() % 24] = i;
@@ -773,7 +773,7 @@ function CoordInit() {
 			EdgeMult(c, moveCube[ud2std[j]], d);
 			MPermMove[i][j] = d.getMPerm();
 		}
-	}		
+	}
 	for (i=0; i<24; i++) {
 		MPermConj[i] = Array(16);
 		c.setMPerm(i);
@@ -782,7 +782,7 @@ function CoordInit() {
 			MPermConj[i][j] = d.getMPerm();
 		}
 	}
-	
+
 	var SymState = Array(324);
 	for (i=0; i<324; i++) {
 		c.setTwist(TwistS2R[i]);
@@ -802,7 +802,7 @@ function CoordInit() {
 				SymStateF[i] |= (1 << j);
 			}
 		}
-	}		
+	}
 	for (i=0; i<336*324*8; i++) {
 		TwistFlipPrun[i] = -1;
 	}
@@ -814,7 +814,7 @@ function CoordInit() {
 	var inv;
 	var select;
 	var check;
-	
+
 	while (done < 336*324*8) {
 		inv = depth > 6;
 		select = inv ? -1 : depth;
@@ -913,7 +913,7 @@ function CoordInit() {
 			}
 		}
 //			System.out.println(String.format("%2d%10d", depth, done));
-	}		
+	}
 
 	for (i=0; i<495*336; i++) {
 		UDSliceFlipPrun[i] = -1;
@@ -963,8 +963,8 @@ function CoordInit() {
 		}
 //			depth++;
 //			System.out.println(String.format("%2d%10d", depth, done));
-	}	
-	
+	}
+
 	SymState = Array(2768);
 	for (i=0; i<2768; i++) {
 		set8Perm(c.ep, EPermS2R[i]);
@@ -1020,8 +1020,8 @@ function CoordInit() {
 			}
 		}
 //			System.out.println(String.format("%2d%10d", depth, done));
-	}		
-		
+	}
+
 	for (i=0; i<24*2768; i++) {
 		MCPermPrun[i] = -1;
 	}
@@ -1070,7 +1070,7 @@ function CoordInit() {
 		}
 //			System.out.println(String.format("%2d%10d", depth, done));
 	}
-}					
+}
 
 function randomCube() {
 	var eperm;
