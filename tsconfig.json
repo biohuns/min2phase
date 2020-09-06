@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es6",
-
-    "rootDir": "src",
-    "outDir": "",
-    "declaration": true,
-    "sourceMap": true,
-
     "alwaysStrict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "",
+    "rootDir": "src",
+    "sourceMap": true,
     "strictNullChecks": true,
-    "noUnusedLocals": true
+    "target": "es6"
   },
   "include": [
     "src"
