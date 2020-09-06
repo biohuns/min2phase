@@ -1,6 +1,6 @@
 const path = require("path");
-const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 const WebpackNotifierPlugin = require("webpack-notifier");
 
 const package = require("./package.json");
@@ -25,10 +25,13 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.ts$/,
-        use: [{
-          loader: 'workerize-loader',
-          options: {inline: true}
-        }, 'ts-loader'],
+        use: [
+          {
+            loader: "workerize-loader",
+            options: { inline: true }
+          },
+          "ts-loader"
+        ]
       },
       {
         test: /\.ts$/,
@@ -38,7 +41,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ ".ts" ]
+    extensions: [".ts"]
   },
   output: {
     filename: targetFileName,
@@ -46,7 +49,7 @@ module.exports = {
     library: umdName,
     libraryTarget: "umd",
     // Workaround for Webpack 4. See https://github.com/webpack/webpack/issues/6522#issuecomment-371120689
-    globalObject: "typeof self !== \"undefined\" ? self : this"
+    globalObject: 'typeof self !== "undefined" ? self : this'
   },
   externals: externals
 };
@@ -54,21 +57,22 @@ module.exports = {
 if (PROD) {
   // https://webpack.js.org/concepts/mode/#mode-production
   module.exports.plugins.push(
-    new UglifyJSPlugin({
-      sourceMap: true,
-      uglifyOptions: {
-        mangle: false
+    new TerserPlugin({
+      terserOptions: {
+        ecma: 6,
+        compress: true,
+        output: {
+          comments: false,
+          beautify: false
+        }
       }
     })
   );
   module.exports.plugins.push(
-    new webpack.DefinePlugin({"process.env.NODE_ENV": JSON.stringify("production")})
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    })
   );
-  module.exports.plugins.push(
-    new webpack.optimize.ModuleConcatenationPlugin()
-  );
-  module.exports.plugins.push(
-    new webpack.NoEmitOnErrorsPlugin()
-  );
+  module.exports.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+  module.exports.plugins.push(new webpack.NoEmitOnErrorsPlugin());
 }
-

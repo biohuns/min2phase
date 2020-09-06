@@ -8,7 +8,7 @@
   "repository": "github:biohuns/min2phase.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "alg": "^0.9.17",
+    "alg": "^0.9.23",
     "kpuzzle": "^0.9.18"
   },
   "externalsForWebpack": [
@@ -20,6 +20,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "jest": "^24.9.0",
+    "terser-webpack-plugin": "^2.1.3",
     "ts-jest": "^23.10.5",
     "ts-loader": "^4.5.0",
     "ts-node": "^7.0.1",
