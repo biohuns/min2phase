@@ -1,7 +1,7 @@
 {
   "name": "@biohuns/min2phase",
   "main": "./dist/min2phase.js",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Template for interacting with cubing JS libraries.",
   "author": "biohuns <18520474+biohuns@users.noreply.github.com>",
   "license": "GPL-3.0-or-later",
